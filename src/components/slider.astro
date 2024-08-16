@@ -87,8 +87,10 @@ const slides = [
 
   let currentSlide = 0;
   let ignoreScrollEvents = false;
+  let scrollTimeout;
 
   function goToSlide(index: number) {
+    const previousSlide = currentSlide;
     ignoreScrollEvents = true;
     slideIndicators.forEach((indicator, i) => {
       if (i === index) {
@@ -115,9 +117,16 @@ const slides = [
     slides[index].scrollIntoView({ behavior: "smooth", block: "nearest", inline: "start" });
     currentSlide = index;
 
-    setTimeout(() => {
-      ignoreScrollEvents = false;
-    }, 500);
+    if (scrollTimeout) {
+      clearTimeout(scrollTimeout);
+    }
+
+    scrollTimeout = setTimeout(
+      () => {
+        ignoreScrollEvents = false;
+      },
+      Math.abs(previousSlide - index) * 500
+    );
   }
 
   previousSlideBtn.addEventListener("click", () => {
