@@ -1,0 +1,157 @@
+---
+import Container from "@components/container.astro";
+import { Icon } from "astro-icon/components";
+
+const slides = [
+  {
+    title: "Slide 1",
+    description: "Slide 1 description",
+    body: "Brief copy to provide more insightful details.",
+    image: "/slider_placeholder.jpeg",
+  },
+  {
+    title: "Slide 2",
+    description: "Slide 2 description",
+    body: "Brief copy to provide more insightful details.",
+    image: "/slider_placeholder.jpeg",
+  },
+  {
+    title: "Slide 3",
+    description: "Slide 3 description",
+    body: "Brief copy to provide more insightful details.",
+    image: "/slider_placeholder.jpeg",
+  },
+  {
+    title: "Slide 4",
+    description: "Slide 4 description",
+    body: "Brief copy to provide more insightful details.",
+    image: "/slider_placeholder.jpeg",
+  },
+  {
+    title: "Slide 5",
+    description: "Slide 5 description",
+    body: "Brief copy to provide more insightful details.",
+    image: "/slider_placeholder.jpeg",
+  },
+];
+---
+
+<Container class="mt-16">
+  <ul id="slide-container" class="flex w-full snap-x snap-mandatory flex-nowrap gap-4 overflow-x-scroll">
+    {
+      slides.map((slide, index) => (
+        <li class="w-full flex-[0_0_280px] snap-start space-y-7 pb-4" data-slide={index}>
+          <div class="flex h-44 w-full items-center justify-center rounded-lg bg-gray-200">
+            <img src={slide.image} alt={slide.title} class="h-44 w-full rounded-lg object-cover object-center" />
+          </div>
+          <div>
+            <h3 class="text-[32px] font-bold leading-[38px]">{slide.title}</h3>
+            <p class="text-sm font-light">{slide.description}</p>
+          </div>
+          <p class="text-lg font-medium">{slide.body}</p>
+        </li>
+      ))
+    }
+  </ul>
+  <div class="mt-10 flex items-center justify-center gap-7">
+    <button disabled id="previous-slide" class="flex items-center gap-1 disabled:opacity-50">
+      <Icon name="ph:caret-left-bold" class="size-5" />
+      <span>Previous</span>
+    </button>
+    <div class="flex items-center gap-3">
+      {
+        slides.map((_, index) => (
+          <button
+            id={`slide-indicator-${index}`}
+            class="size-2 origin-center scale-100 transform rounded-full transition-all"
+            aria-label={`Go to slide ${index + 1}`}
+          />
+        ))
+      }
+    </div>
+    <button id="next-slide" class="flex items-center gap-1 disabled:opacity-50">
+      <span>Next</span>
+      <Icon name="ph:caret-right-bold" class="size-5" />
+    </button>
+  </div>
+</Container>
+
+<script>
+  const nextSlideBtn = document.getElementById("next-slide") as HTMLButtonElement;
+  const slideContainer = document.getElementById("slide-container") as HTMLUListElement;
+  const slides = document.querySelectorAll("[data-slide]") as NodeListOf<HTMLLIElement>;
+  const previousSlideBtn = document.getElementById("previous-slide") as HTMLButtonElement;
+  const slideIndicators = document.querySelectorAll(
+    "button[aria-label^='Go to slide']"
+  ) as NodeListOf<HTMLButtonElement>;
+
+  let currentSlide = 0;
+  let ignoreScrollEvents = false;
+
+  function goToSlide(index: number) {
+    ignoreScrollEvents = true;
+    slideIndicators.forEach((indicator, i) => {
+      if (i === index) {
+        indicator.style.backgroundColor = "#009CCD";
+        indicator.style.scale = "2";
+      } else {
+        indicator.style.backgroundColor = "#D9D9D9";
+        indicator.style.scale = "1";
+      }
+    });
+
+    if (index === 0) {
+      previousSlideBtn.disabled = true;
+    } else {
+      previousSlideBtn.disabled = false;
+    }
+
+    if (index === slides.length - 1) {
+      nextSlideBtn.disabled = true;
+    } else {
+      nextSlideBtn.disabled = false;
+    }
+
+    slides[index].scrollIntoView({ behavior: "smooth", block: "nearest", inline: "start" });
+    currentSlide = index;
+
+    setTimeout(() => {
+      ignoreScrollEvents = false;
+    }, 500);
+  }
+
+  previousSlideBtn.addEventListener("click", () => {
+    if (currentSlide > 0) {
+      goToSlide(currentSlide - 1);
+    }
+  });
+
+  nextSlideBtn.addEventListener("click", () => {
+    if (currentSlide < slides.length - 1) {
+      goToSlide(currentSlide + 1);
+    }
+  });
+
+  slideIndicators.forEach((indicator, index) => {
+    indicator.addEventListener("click", () => {
+      goToSlide(index);
+    });
+  });
+
+  slideContainer.addEventListener("scroll", () => {
+    if (ignoreScrollEvents) return;
+
+    const { width } = slides[0].getBoundingClientRect();
+    const slideIndex = Math.round(slideContainer.scrollLeft / width);
+    goToSlide(slideIndex);
+  });
+
+  goToSlide(currentSlide);
+</script>
+
+<style>
+  ul.snap-x::-webkit-scrollbar {
+    display: none;
+    scrollbar-width: none;
+  }
+</style>
