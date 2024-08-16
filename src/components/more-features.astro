@@ -1,0 +1,59 @@
+---
+import { Icon } from "astro-icon/components";
+
+const features = [
+  {
+    title: "Instantly Download Certificate for Free",
+    description: "Your certificate will be emailed immediately upon completion.",
+  },
+  {
+    title: "Fun and engaging videos",
+    description: "Life is short. Enjoy it!",
+  },
+  {
+    title: "Use any device",
+    description: "The course works on computers and smartphones.",
+  },
+  {
+    title: "Opportunity for insurance discount",
+    description: "Verify discount eligibility with your insurance company.",
+  },
+  {
+    title: "No stressful exams",
+    description: "Only knowledge checks along the way that can be retaken if needed.",
+  },
+  {
+    title: "Learn at your own pace",
+    description: "Stop and start as needed to fit your schedule.",
+  },
+  {
+    title: "Pay and Learn 100% online",
+    description: "No lectures or in-person testing at all!",
+  },
+  {
+    title: "Tips from Law Enforcement",
+    description: "Learn safety tips from experienced officers.",
+  },
+];
+---
+
+<div class="mt-12 w-full bg-brand-yellow py-8">
+  <div class="mx-auto max-w-screen-xl">
+    <h2 class="text-balance px-4 text-center text-5xl font-bold leading-tight md:text-7xl">
+      Texas Online Defensive Driving Course.
+    </h2>
+    <ul class="mt-8 grid gap-6 px-4 sm:grid-cols-2">
+      {
+        features.map((item) => (
+          <li class="space-y-1.5 rounded-lg bg-white p-6 shadow-[0px_4px_9px_0px_#00000015]">
+            <Icon class="text-brand-blue size-6" name="ph:seal-check-fill" />
+            <div>
+              <h3 class="text-2xl font-semibold">{item.title}</h3>
+              <p class="mt-2 text-lg leading-relaxed">{item.description}</p>
+            </div>
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+</div>

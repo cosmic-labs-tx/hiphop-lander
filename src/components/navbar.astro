@@ -1,0 +1,21 @@
+---
+import logo from "@assets/logo.svg";
+import Container from "@components/container.astro";
+import Link from "@components/ui/link.astro";
+import Image from "astro/components/Image.astro";
+---
+
+<Container>
+  <header class="my-5 rounded-full px-10 py-6 shadow-[0px_6px_39px_0px_#00000015]">
+    <nav>
+      <div class="flex w-full items-center justify-between">
+        <a href="/" class="inline-block">
+          <Image src={logo} alt="Logo" class="h-6 w-20" />
+        </a>
+        <div class="flex items-center gap-4">
+          <Link href="#" style="outline">Login</Link>
+        </div>
+      </div>
+    </nav>
+  </header>
+</Container>
