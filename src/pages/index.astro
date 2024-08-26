@@ -1,14 +1,26 @@
 ---
+import CtaDark from "@components/cta-dark.astro";
+import Faq from "@components/faq.astro";
 import Features from "@components/features.astro";
 import Hero from "@components/hero.astro";
+import HopInToday from "@components/hop-in-today.astro";
+import Insurance from "@components/insurance.astro";
 import MoreFeatures from "@components/more-features.astro";
 import Slider from "@components/slider.astro";
 import Layout from "@layouts/Layout.astro";
 ---
 
 <Layout title="">
-  <Hero />
-  <Features />
-  <MoreFeatures />
-  <Slider />
+  <div class="space-y-12 pb-8 pt-4 md:pb-24 md:pt-28">
+    <Hero />
+    <Features />
+    <MoreFeatures />
+  </div>
+  <div class="space-y-16">
+    <Slider />
+    <CtaDark />
+    <Faq />
+    <HopInToday />
+    <Insurance />
+  </div>
 </Layout>

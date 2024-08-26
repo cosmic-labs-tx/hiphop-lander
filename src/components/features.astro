@@ -28,12 +28,12 @@ const features = [
 ---
 
 <Container>
-  <ul class="mt-12 grid gap-12 sm:grid-cols-2 md:grid-cols-4">
+  <ul class="grid gap-12 sm:grid-cols-2 md:grid-cols-4">
     {
       features.map((item) => (
         <li class="flex flex-col items-center gap-2">
           <div class="mt-1 shrink-0 grow-0 rounded-full border border-black p-4">
-            <Icon class="text-brand-blue size-10" name={item.icon} />
+            <Icon class="size-10 text-brand-blue" name={item.icon} />
           </div>
           <div class="text-center">
             <h3 class="text-2xl font-semibold">{item.title}</h3>

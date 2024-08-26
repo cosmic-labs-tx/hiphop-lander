@@ -1,0 +1,23 @@
+---
+import car from "@assets/car.jpeg";
+import Container from "@components/container.astro";
+import { Icon } from "astro-icon/components";
+import { Image } from "astro:assets";
+---
+
+<Container>
+  <div class="overflow-hidden rounded-lg shadow-[0px_4px_17px_0px_#00000015]">
+    <a href="#">
+      <div class="flex pr-4">
+        <Image src={car} alt="An old yellow car driving down the highway" class="w-28 object-cover object-[30%_50%]" />
+        <div class="space-y-2 py-2 pl-6">
+          <h2 class="text-pretty text-2xl font-bold">Reduce the cost of insurance.</h2>
+          <p class="text-lg font-medium">Learn more</p>
+        </div>
+        <div class="flex items-center">
+          <Icon name="ph:caret-right-bold" class="size-6" />
+        </div>
+      </div>
+    </a>
+  </div>
+</Container>

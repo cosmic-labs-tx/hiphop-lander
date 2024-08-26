@@ -36,7 +36,7 @@ const slides = [
 ];
 ---
 
-<Container class="mt-16">
+<Container>
   <ul id="slide-container" class="flex w-full snap-x snap-mandatory flex-nowrap gap-4 overflow-x-scroll">
     {
       slides.map((slide, index) => (
@@ -87,7 +87,7 @@ const slides = [
 
   let currentSlide = 0;
   let ignoreScrollEvents = false;
-  let scrollTimeout;
+  let scrollTimeout: NodeJS.Timeout;
 
   function goToSlide(index: number) {
     const previousSlide = currentSlide;

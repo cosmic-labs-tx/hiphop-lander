@@ -1,0 +1,75 @@
+---
+import Container from "@components/container.astro";
+
+const data = [
+  {
+    question: "What is Astro?",
+    answer:
+      "Astro is a new kind of static site generator that combines the simplicity of a build tool with the speed of a server.",
+  },
+  {
+    question: "What is Astro?",
+    answer:
+      "Astro is a new kind of static site generator that combines the simplicity of a build tool with the speed of a server.",
+  },
+  {
+    question: "What is Astro?",
+    answer:
+      "Astro is a new kind of static site generator that combines the simplicity of a build tool with the speed of a server.",
+  },
+  {
+    question: "What is Astro?",
+    answer:
+      "Astro is a new kind of static site generator that combines the simplicity of a build tool with the speed of a server.",
+  },
+  {
+    question: "What is Astro?",
+    answer:
+      "Astro is a new kind of static site generator that combines the simplicity of a build tool with the speed of a server.",
+  },
+];
+---
+
+<Container>
+  <ul class="flex flex-col space-y-8 sm:mx-12">
+    {
+      data.map((faq) => {
+        return (
+          <li>
+            <details>
+              <summary class="inline-flex list-none items-center gap-8 text-pretty text-3xl font-bold sm:text-5xl">
+                <span>{faq.question}</span>
+                <div id="icon" class="size-10" />
+              </summary>
+              <p class="mt-8 inline-block border-t border-black pt-8 text-lg">{faq.answer}</p>
+            </details>
+          </li>
+        );
+      })
+    }
+  </ul>
+</Container>
+
+<style>
+  details summary {
+    cursor: pointer;
+  }
+
+  details summary > * {
+    display: inline;
+  }
+
+  details summary::-webkit-details-marker {
+    display: none;
+  }
+
+  #icon {
+    background-image: url("/faq-closed.svg");
+    background-repeat: no-repeat;
+  }
+
+  li:has(details[open]) #icon {
+    background-image: url("/faq-open.svg");
+    transform: rotate(45deg);
+  }
+</style>

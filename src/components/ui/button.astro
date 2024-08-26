@@ -7,16 +7,12 @@ interface Props {
   [x: string]: any;
 }
 
-const { size = "md", style = "primary", block, class: className, ...rest } = Astro.props;
-
-const sizes = {
-  md: "px-5 py-2.5",
-  lg: "px-6 py-3",
-};
+const { style = "primary", block, class: className, ...rest } = Astro.props;
 
 const styles = {
-  outline: "border-2 border-black hover:bg-black text-black hover:text-white",
-  primary: "bg-black text-white hover:bg-slate-900  border-2 border-transparent",
+  outline: "bg-transparent border-4 border-brand-yellow text-black rounded-full text-sm font-bold px-6 py-2",
+  primary:
+    "bg-brand-yellow text-black hover:bg-brand-yellow/80 rounded-full font-bold text-xl tracking-[-4%] py-4 px-20 shadow-[0px_1px_0px_0px_#FFFFFFB2_inset,0px_-3px_0px_0px_#A16A0040_inset] active:shadow-[0px_1px_0px_0px_#FFFFFFB2_inset] active:translate-y-px",
 };
 ---
 
@@ -25,7 +21,6 @@ const styles = {
   class:list={[
     "rounded text-center ring-gray-200 ring-offset-2 transition focus-visible:ring-2",
     block && "w-full",
-    sizes[size],
     styles[style],
     className,
   ]}
