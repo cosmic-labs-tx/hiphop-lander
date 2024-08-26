@@ -1,4 +1,6 @@
 ---
+import { cn } from "utils";
+
 interface Props {
   size?: "md" | "lg";
   block?: boolean;
@@ -18,11 +20,11 @@ const styles = {
 
 <button
   {...rest}
-  class:list={[
+  class:list={cn([
     "rounded text-center ring-gray-200 ring-offset-2 transition focus-visible:ring-2",
     block && "w-full",
     styles[style],
     className,
-  ]}
+  ])}
   ><slot />
 </button>

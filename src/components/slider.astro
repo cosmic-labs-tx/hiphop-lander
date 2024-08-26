@@ -155,7 +155,18 @@ const slides = [
     goToSlide(slideIndex);
   });
 
-  goToSlide(currentSlide);
+  document.addEventListener("DOMContentLoaded", () => {
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          goToSlide(currentSlide);
+          observer.disconnect(); // Stop observing once the slides section is in view
+        }
+      });
+    });
+
+    observer.observe(slideContainer);
+  });
 </script>
 
 <style>
