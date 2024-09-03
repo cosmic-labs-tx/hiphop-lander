@@ -9,17 +9,23 @@ import LearnMore from "@components/learn-more.astro";
 import MoreFeatures from "@components/more-features.astro";
 import Slider from "@components/slider.astro";
 import Layout from "@layouts/Layout.astro";
+import fetchStrapi, { type LandingPage } from "strapi";
+
+const { attributes } = await fetchStrapi<LandingPage>({
+  endpoint: "hip-hop-landing-page?populate=*",
+  wrappedByKey: "data",
+});
 ---
 
 <Layout title="">
   <div class="space-y-12 pb-8 pt-4 md:pb-24 md:pt-28">
-    <Hero />
-    <Features />
-    <MoreFeatures />
+    <Hero highlighted={attributes.hero_highlighted} title={attributes.hero_title} subtitle={attributes.hero_subtitle} />
+    <Features features={attributes.feature} />
+    <MoreFeatures featureCards={attributes.feature_card} />
   </div>
   <div class="space-y-16">
-    <Slider />
-    <CtaDark />
+    <Slider slides={attributes.slide} />
+    <CtaDark title={attributes.cta_dark} />
     <Faq />
     <HopInToday />
     <!-- TODO: video clip -->

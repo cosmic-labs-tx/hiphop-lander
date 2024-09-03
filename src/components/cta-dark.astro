@@ -1,6 +1,9 @@
 ---
 import Container from "@components/container.astro";
 import Link from "@components/ui/link.astro";
+
+type Props = { title: string };
+const { title } = Astro.props;
 ---
 
 <Container>
@@ -16,7 +19,7 @@ import Link from "@components/ui/link.astro";
             fill="#009CCD"></path>
         </svg>
       </div>
-      <h2 class="text-2xl font-bold">Complete the course in 6 hours and get your certificate instantly.</h2>
+      <h2 class="text-2xl font-bold">{title}</h2>
     </div>
     <Link href="https://course.hiphopdriving.com/preview" style="outline" class="border-white text-white"
       >Start Course</Link

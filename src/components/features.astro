@@ -2,29 +2,10 @@
 // @ts-ignore
 import Container from "@components/container.astro";
 import { Icon } from "astro-icon/components";
+import type { Feature } from "strapi";
 
-const features = [
-  {
-    title: "Texas TDLR Approved",
-    description: "We're legit",
-    icon: "ph:seal-check-fill",
-  },
-  {
-    title: "Guaranteed Lowest Price",
-    description: "Seriously!",
-    icon: "ph:credit-card-fill",
-  },
-  {
-    title: "Guaranteed Shortest Course",
-    description: "Required by law.",
-    icon: "ph:clock-fill",
-  },
-  {
-    title: "Ticket Dismissed Guaranteed",
-    description: "Or your money back.",
-    icon: "ph:shield-check-fill",
-  },
-];
+type Props = { features: Array<Feature> };
+const { features } = Astro.props;
 ---
 
 <Container>
@@ -37,7 +18,7 @@ const features = [
           </div>
           <div class="text-center">
             <h3 class="text-2xl font-semibold">{item.title}</h3>
-            <p class="mt-2 text-lg leading-relaxed">{item.description}</p>
+            <p class="mt-2 text-lg leading-relaxed">{item.subtitle}</p>
           </div>
         </li>
       ))

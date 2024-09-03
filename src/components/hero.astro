@@ -1,6 +1,14 @@
 ---
 import Container from "@components/container.astro";
 import Link from "@components/ui/link.astro";
+
+type Props = {
+  highlighted: string;
+  title: string;
+  subtitle: string;
+};
+
+const props = Astro.props;
 ---
 
 <Container>
@@ -8,11 +16,11 @@ import Link from "@components/ui/link.astro";
     <h1
       class="text-balance text-center text-[56px] font-bold leading-[67px] md:text-7xl lg:text-8xl lg:tracking-tight xl:text-7xl xl:tracking-tighter"
     >
-      <span class="block text-brand-yellow">#1 Music Themed</span>
-      <span> Defensive Driving Course.</span>
+      <span class="block text-brand-yellow">{props.highlighted}</span>
+      <span> {props.title}</span>
     </h1>
     <p class="mt-8 text-center text-lg font-medium">
-      Join our Hip Hop Defensive Driving Course for a jam-packed blend of safety and style!
+      {props.subtitle}
     </p>
     <div class="mt-12 w-full sm:w-auto">
       <Link href="https://course.hiphopdriving.com/preview" class="flex items-center justify-center gap-1"

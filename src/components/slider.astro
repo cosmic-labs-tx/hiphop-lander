@@ -1,39 +1,10 @@
 ---
 import Container from "@components/container.astro";
 import { Icon } from "astro-icon/components";
+import type { Slide } from "strapi";
 
-const slides = [
-  {
-    title: "Slide 1",
-    description: "Slide 1 description",
-    body: "Brief copy to provide more insightful details.",
-    image: "/slider_placeholder.jpeg",
-  },
-  {
-    title: "Slide 2",
-    description: "Slide 2 description",
-    body: "Brief copy to provide more insightful details.",
-    image: "/slider_placeholder.jpeg",
-  },
-  {
-    title: "Slide 3",
-    description: "Slide 3 description",
-    body: "Brief copy to provide more insightful details.",
-    image: "/slider_placeholder.jpeg",
-  },
-  {
-    title: "Slide 4",
-    description: "Slide 4 description",
-    body: "Brief copy to provide more insightful details.",
-    image: "/slider_placeholder.jpeg",
-  },
-  {
-    title: "Slide 5",
-    description: "Slide 5 description",
-    body: "Brief copy to provide more insightful details.",
-    image: "/slider_placeholder.jpeg",
-  },
-];
+type Props = { slides: Array<Slide> };
+const { slides } = Astro.props;
 ---
 
 <Container>
@@ -42,13 +13,17 @@ const slides = [
       slides.map((slide, index) => (
         <li class="w-full flex-[0_0_280px] snap-start space-y-7 pb-4" data-slide={index}>
           <div class="flex h-44 w-full items-center justify-center rounded-lg bg-gray-200">
-            <img src={slide.image} alt={slide.title} class="h-44 w-full rounded-lg object-cover object-center" />
+            <img
+              src="/slider_placeholder.jpeg"
+              alt={slide.title}
+              class="h-44 w-full rounded-lg object-cover object-center"
+            />
           </div>
           <div>
             <h3 class="text-[32px] font-bold leading-[38px]">{slide.title}</h3>
-            <p class="text-sm font-light">{slide.description}</p>
+            <p class="text-sm font-light">{slide.subtitle}</p>
           </div>
-          <p class="text-lg font-medium">{slide.body}</p>
+          <p class="text-lg font-medium">{slide.description}</p>
         </li>
       ))
     }
