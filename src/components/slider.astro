@@ -147,13 +147,16 @@ const slides = [
     });
   });
 
-  slideContainer.addEventListener("scroll", () => {
-    if (ignoreScrollEvents) return;
+  slideContainer.addEventListener(
+    "scroll",
+    debounce(() => {
+      if (ignoreScrollEvents) return;
 
-    const { width } = slides[0].getBoundingClientRect();
-    const slideIndex = Math.round(slideContainer.scrollLeft / width);
-    goToSlide(slideIndex);
-  });
+      const { width } = slides[0].getBoundingClientRect();
+      const slideIndex = Math.round(slideContainer.scrollLeft / width);
+      goToSlide(slideIndex);
+    }, 500)
+  );
 
   document.addEventListener("DOMContentLoaded", () => {
     const observer = new IntersectionObserver((entries) => {
@@ -167,6 +170,14 @@ const slides = [
 
     observer.observe(slideContainer);
   });
+
+  function debounce(func: Function, wait: number) {
+    let timeout: NodeJS.Timeout;
+    return function (...args: any[]) {
+      clearTimeout(timeout);
+      timeout = setTimeout(() => func.apply(this, args), wait);
+    };
+  }
 </script>
 
 <style>
