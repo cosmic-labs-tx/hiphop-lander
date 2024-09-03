@@ -1,39 +1,15 @@
 ---
 import Container from "@components/container.astro";
+import type { Faq } from "strapi";
 
-const data = [
-  {
-    question: "What is Astro?",
-    answer:
-      "Astro is a new kind of static site generator that combines the simplicity of a build tool with the speed of a server.",
-  },
-  {
-    question: "What is Astro?",
-    answer:
-      "Astro is a new kind of static site generator that combines the simplicity of a build tool with the speed of a server.",
-  },
-  {
-    question: "What is Astro?",
-    answer:
-      "Astro is a new kind of static site generator that combines the simplicity of a build tool with the speed of a server.",
-  },
-  {
-    question: "What is Astro?",
-    answer:
-      "Astro is a new kind of static site generator that combines the simplicity of a build tool with the speed of a server.",
-  },
-  {
-    question: "What is Astro?",
-    answer:
-      "Astro is a new kind of static site generator that combines the simplicity of a build tool with the speed of a server.",
-  },
-];
+type Props = { faqs: Array<Faq> };
+const { faqs } = Astro.props;
 ---
 
 <Container>
   <ul class="flex flex-col space-y-8 sm:mx-12">
     {
-      data.map((faq) => {
+      faqs.map((faq) => {
         return (
           <li>
             <details>

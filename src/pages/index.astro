@@ -12,7 +12,8 @@ import Layout from "@layouts/Layout.astro";
 import fetchStrapi, { type LandingPage } from "strapi";
 
 const { attributes } = await fetchStrapi<LandingPage>({
-  endpoint: "hip-hop-landing-page?populate=*",
+  endpoint: "hip-hop-landing-page",
+  query: { populate: "*" },
   wrappedByKey: "data",
 });
 ---
@@ -26,10 +27,10 @@ const { attributes } = await fetchStrapi<LandingPage>({
   <div class="space-y-16">
     <Slider slides={attributes.slide} />
     <CtaDark title={attributes.cta_dark} />
-    <Faq />
-    <HopInToday />
+    <Faq faqs={attributes.faq} />
+    <HopInToday title={attributes.cta_large} />
     <!-- TODO: video clip -->
-    <LearnMore />
-    <Insurance />
+    <LearnMore modules={attributes.module_card} />
+    <Insurance title={attributes.insurance_cta} />
   </div>
 </Layout>

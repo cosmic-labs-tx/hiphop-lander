@@ -1,40 +1,23 @@
 ---
 import Container from "@components/container.astro";
 import Button from "@components/ui/button.astro";
-const data = [
-  {
-    title: "A single course module",
-    subtitle: "45 min / 12 questions",
-    description: "Some detailed information about this class can go right here.",
-    buttonText: "Call to action",
-  },
-  {
-    title: "Another course module",
-    subtitle: "30 min / 8 questions",
-    description: "Some detailed information about this class can go right here.",
-    buttonText: "Call to action",
-  },
-  {
-    title: "A third course module",
-    subtitle: "60 min / 15 questions",
-    description: "Some detailed information about this class can go right here.",
-    buttonText: "Call to action",
-  },
-];
+import type { ModuleCard } from "strapi";
+type Props = { modules: Array<ModuleCard> };
+const { modules } = Astro.props;
 ---
 
 <Container>
   <h2 class="text-center text-3xl font-bold sm:text-5xl">Learn more about the course</h2>
   <ul class="mt-12 flex w-full snap-x snap-mandatory flex-nowrap gap-4 overflow-x-scroll">
     {
-      data.map((i) => (
+      modules.map((m) => (
         <li class="w-full max-w-[calc(90%-40px)] flex-[0_0_370px] snap-start space-y-6 overflow-hidden rounded-2xl bg-[url('/car2.jpeg')] bg-center object-cover p-8 sm:max-w-[auto] sm:flex-[0_0_560px] sm:p-16">
           <div class="space-y-2 rounded-lg bg-white/80 px-6 py-8 backdrop-blur-lg sm:space-y-6 sm:px-7 sm:py-12">
-            <h3 class="text-pretty text-2xl font-bold sm:text-5xl">{i.title}</h3>
-            <p class="text-sm font-light">{i.subtitle}</p>
-            <p class="font-medium sm:text-lg">{i.description}</p>
+            <h3 class="text-pretty text-2xl font-bold sm:text-5xl">{m.title}</h3>
+            <p class="text-sm font-light">{m.subtitle}</p>
+            <p class="font-medium sm:text-lg">{m.description}</p>
             <Button style="outline" class="w-full bg-brand-yellow text-black sm:w-auto">
-              {i.buttonText}
+              {m.button_text}
             </Button>
           </div>
         </li>
