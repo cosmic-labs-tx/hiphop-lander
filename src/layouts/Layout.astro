@@ -1,6 +1,7 @@
 ---
 import Footer from "@components/footer.astro";
 import Navbar from "@components/navbar.astro";
+import Posthog from "@components/posthog.astro";
 import "@fontsource-variable/inter/index.css";
 import { SEO } from "astro-seo";
 
@@ -45,6 +46,7 @@ const makeTitle = title ? title + " | " + "Hip Hop Defensive Driving" : "Hip Hop
         },
       }}
     />
+    <Posthog />
   </head>
   <body>
     <Navbar />
