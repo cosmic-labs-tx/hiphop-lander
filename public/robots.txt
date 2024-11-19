@@ -1,4 +1,4 @@
 User-agent: *
-Allow: /
+Disallow: /
 
 Sitemap: http://hiphopdriving.com/sitemap-index.xml
