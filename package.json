@@ -11,13 +11,14 @@
     "astro": "astro"
   },
   "dependencies": {
-    "@astrojs/mdx": "^3.1.3",
-    "@astrojs/sitemap": "^3.1.6",
-    "@astrojs/tailwind": "^5.1.0",
+    "@astrojs/mdx": "^4.3.13",
+    "@astrojs/sitemap": "^3.6.0",
+    "@astrojs/tailwind": "^6.0.2",
     "@fontsource-variable/inter": "^5.0.20",
     "@iconify-json/ph": "^1.1.14",
+    "@sensinum/astro-strapi-loader": "^1.0.11",
     "@tailwindcss/typography": "^0.5.14",
-    "astro": "^4.14.2",
+    "astro": "^5.16.6",
     "astro-icon": "^1.1.0",
     "astro-seo": "^0.8.4",
     "clsx": "^2.1.1",
