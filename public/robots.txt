@@ -1,4 +1,5 @@
 User-agent: *
-Disallow: /
+Disallow:
+Allow: /
 
-Sitemap: http://hiphopdriving.com/sitemap-index.xml
+Sitemap: https://hiphopdriving.com/sitemap-index.xml
