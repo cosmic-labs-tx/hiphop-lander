@@ -1,0 +1,20 @@
+---
+import Layout from "@layouts/Layout.astro";
+import { marked } from "marked";
+import fetchStrapi, { type SupportPage } from "strapi";
+
+const { attributes } = await fetchStrapi<SupportPage>({
+  endpoint: "support-page",
+  wrappedByKey: "data",
+});
+
+const content = marked.parse(attributes.content ?? "");
+---
+
+<Layout title="Support">
+  <section class="px-6 py-12">
+    <div class="mx-auto flex w-full max-w-3xl flex-col gap-6">
+      <article class="prose prose-neutral max-w-none" set:html={content} />
+    </div>
+  </section>
+</Layout>

@@ -107,6 +107,16 @@ export interface TermsAndConditions {
   };
 }
 
+export interface SupportPage {
+  id: number;
+  attributes: {
+    createdAt: string;
+    updatedAt: string;
+    publishedAt: string;
+    content: string;
+  };
+}
+
 // createdAt: '2024-09-03T02:23:48.638Z',
 // updatedAt: '2024-09-03T02:32:28.233Z',
 // publishedAt: '2024-09-03T02:32:28.232Z',

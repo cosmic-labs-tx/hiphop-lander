@@ -16,10 +16,11 @@ const { attributes } = await fetchStrapi<LandingPage>({
   query: { populate: "*" },
   wrappedByKey: "data",
 });
+console.log(attributes.module_card);
 ---
 
 <Layout title="">
-  <div class="space-y-12 pb-8 pt-4 md:pb-24 md:pt-28">
+  <div class="space-y-12 pt-4 pb-8 md:pt-28 md:pb-24">
     <Hero highlighted={attributes.hero_highlighted} title={attributes.hero_title} subtitle={attributes.hero_subtitle} />
     <Features features={attributes.feature} />
     <MoreFeatures featureCards={attributes.feature_card} />
@@ -29,7 +30,7 @@ const { attributes } = await fetchStrapi<LandingPage>({
     <CtaDark title={attributes.cta_dark} />
     <Faq faqs={attributes.faq} />
     <HopInToday title={attributes.cta_large} />
-    <LearnMore modules={attributes.module_card} />
+    {attributes.module_card.length > 0 && <LearnMore modules={attributes.module_card} />}
     <Insurance title={attributes.insurance_cta} />
   </div>
 </Layout>
