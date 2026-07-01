@@ -41,7 +41,7 @@ const { page } = Astro.props;
                 >
                   {imageUrl && <img src={imageUrl} alt={post.attributes.title} class="h-64 w-full object-cover" />}
                   <div class="flex flex-col items-start gap-3 p-6">
-                    <p class="text-sm text-gray-500">{publishedDate}</p>
+                    {/* <p class="text-sm text-gray-500">{publishedDate}</p> */}
                     <h2 class="text-2xl font-bold">{post.attributes.title}</h2>
                     {post.attributes.description && <p class="text-gray-600">{post.attributes.description}</p>}
                     <span class="ml-auto">Read More &rarr;</span>
