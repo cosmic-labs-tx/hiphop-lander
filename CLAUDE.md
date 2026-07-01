@@ -4,7 +4,10 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project
 
-Landing page for Hip Hop Defensive Driving ([hiphopdriving.com](https://hiphopdriving.com)), built with Astro. Content (landing page copy, FAQs, slides, features, blog posts, terms, support page) is authored in a headless Strapi CMS and fetched at build time — this repo contains no content, only presentation.
+Landing page for Hip Hop Defensive Driving ([hiphopdriving.com](https://hiphopdriving.com)), built with Astro. Content (landing page copy, FAQs, slides, features, blog posts, terms, support page) is authored in a headless Strapi V4 CMS and fetched at build time — this repo contains no content, only presentation.
+
+_IMPORTANT_
+This project uses Strapi v4, which has a different API than v5. If you are unfamiliar with Strapi, please read the [v4 docs](https://docs-v4.strapi.io/dev-docs/api/rest) before making changes.
 
 ## Commands
 
