@@ -1,0 +1,33 @@
+---
+import Link from "@components/ui/link.astro";
+import Layout from "@layouts/Layout.astro";
+import type { GetStaticPaths } from "astro";
+import { marked } from "marked";
+import fetchStrapi, { type BlogPost } from "strapi";
+
+export const getStaticPaths = (async () => {
+  const { data: posts } = await fetchStrapi<{ data: BlogPost[] }>({
+    endpoint: "blog-posts",
+    query: {
+      populate: "featured_image",
+      "pagination[pageSize]": "100",
+    },
+  });
+  return posts.map((post) => ({
+    params: { slug: post.attributes.slug },
+    props: { post },
+  }));
+}) satisfies GetStaticPaths;
+
+const { post } = Astro.props;
+const content = marked.parse(post.attributes.content ?? "");
+---
+
+<Layout title={post.attributes.title}>
+  <section class="px-6 py-12">
+    <div class="mx-auto flex w-full max-w-3xl flex-col gap-6">
+      <Link href="/blog/" style="outline" class="self-start">&larr; Back</Link>
+      <article class="prose prose-neutral max-w-none" set:html={content} />
+    </div>
+  </section>
+</Layout>

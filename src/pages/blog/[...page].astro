@@ -1,0 +1,51 @@
+---
+import Link from "@components/ui/link.astro";
+import Layout from "@layouts/Layout.astro";
+import type { GetStaticPaths } from "astro";
+import fetchStrapi, { type BlogPost } from "strapi";
+
+export const getStaticPaths = (async ({ paginate }) => {
+  const { data: posts } = await fetchStrapi<{ data: BlogPost[] }>({
+    endpoint: "blog-posts",
+    query: {
+      populate: "featured_image",
+      sort: "publishedAt:desc",
+      "pagination[pageSize]": "100",
+    },
+  });
+  return paginate(posts, { pageSize: 10 });
+}) satisfies GetStaticPaths;
+
+const { page } = Astro.props;
+---
+
+<Layout title="Blog">
+  <section class="px-6 py-12">
+    <div class="mx-auto flex w-full max-w-3xl flex-col gap-6">
+      <h1 class="text-3xl font-bold">Blog</h1>
+      <ul class="flex flex-col gap-8">
+        {
+          page.data.map((post) => {
+            const imageUrl = post.attributes.featured_image?.data?.attributes?.url;
+            return (
+              <li class="flex flex-col gap-2">
+                <a href={`/blog/${post.attributes.slug}/`}>
+                  <h2 class="text-xl font-bold">{post.attributes.title}</h2>
+                </a>
+                {imageUrl && <img src={imageUrl} alt={post.attributes.title} class="h-48 w-full rounded-lg object-cover" />}
+                <p class="text-gray-600">{post.attributes.description}</p>
+              </li>
+            );
+          })
+        }
+      </ul>
+      <nav class="flex items-center justify-between pt-6">
+        {page.url.prev ? <Link href={page.url.prev} style="outline">Previous</Link> : <span />}
+        <span class="text-sm text-gray-500">
+          Page {page.currentPage} of {page.lastPage}
+        </span>
+        {page.url.next ? <Link href={page.url.next} style="outline">Next</Link> : <span />}
+      </nav>
+    </div>
+  </section>
+</Layout>
