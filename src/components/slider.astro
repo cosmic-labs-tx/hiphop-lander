@@ -1,6 +1,5 @@
 ---
 import Container from "@components/container.astro";
-import { Icon } from "astro-icon/components";
 import type { Slide } from "strapi";
 
 type Props = { slides: Array<Slide> };
@@ -14,13 +13,13 @@ const { slides } = Astro.props;
         <li class="w-full flex-[0_0_280px] snap-start space-y-7 pb-4" data-slide={index}>
           <div class="flex h-44 w-full items-center justify-center rounded-lg bg-gray-200">
             <img
-              src="/slider_placeholder.jpeg"
-              alt={slide.title}
+              src={slide.image?.data?.attributes?.url || "/slider_placeholder.jpeg"}
+              alt={slide.image?.data?.attributes?.alternativeText || slide.title}
               class="h-44 w-full rounded-lg object-cover object-center"
             />
           </div>
           <div>
-            <h3 class="text-[32px] font-bold leading-[38px]">{slide.title}</h3>
+            <h3 class="text-[32px] leading-9.5 font-bold">{slide.title}</h3>
             <p class="text-sm font-light">{slide.subtitle}</p>
           </div>
           <p class="text-lg font-medium">{slide.description}</p>
@@ -28,136 +27,4 @@ const { slides } = Astro.props;
       ))
     }
   </ul>
-  <div class="mt-10 flex items-center justify-center gap-7">
-    <button disabled id="previous-slide" class="flex items-center gap-1 disabled:opacity-50">
-      <Icon name="ph:caret-left-bold" class="size-5" />
-      <span>Previous</span>
-    </button>
-    <div class="flex items-center gap-3">
-      {
-        slides.map((_, index) => (
-          <button
-            id={`slide-indicator-${index}`}
-            class="size-2 origin-center scale-100 transform rounded-full transition-all"
-            aria-label={`Go to slide ${index + 1}`}
-          />
-        ))
-      }
-    </div>
-    <button id="next-slide" class="flex items-center gap-1 disabled:opacity-50">
-      <span>Next</span>
-      <Icon name="ph:caret-right-bold" class="size-5" />
-    </button>
-  </div>
 </Container>
-
-<script>
-  const nextSlideBtn = document.getElementById("next-slide") as HTMLButtonElement;
-  const slideContainer = document.getElementById("slide-container") as HTMLUListElement;
-  const slides = document.querySelectorAll("[data-slide]") as NodeListOf<HTMLLIElement>;
-  const previousSlideBtn = document.getElementById("previous-slide") as HTMLButtonElement;
-  const slideIndicators = document.querySelectorAll(
-    "button[aria-label^='Go to slide']"
-  ) as NodeListOf<HTMLButtonElement>;
-
-  let currentSlide = 0;
-  let ignoreScrollEvents = false;
-  let scrollTimeout: NodeJS.Timeout;
-
-  function goToSlide(index: number) {
-    const previousSlide = currentSlide;
-    ignoreScrollEvents = true;
-    slideIndicators.forEach((indicator, i) => {
-      if (i === index) {
-        indicator.style.backgroundColor = "#009CCD";
-        indicator.style.scale = "2";
-      } else {
-        indicator.style.backgroundColor = "#D9D9D9";
-        indicator.style.scale = "1";
-      }
-    });
-
-    if (index === 0) {
-      previousSlideBtn.disabled = true;
-    } else {
-      previousSlideBtn.disabled = false;
-    }
-
-    if (index === slides.length - 1) {
-      nextSlideBtn.disabled = true;
-    } else {
-      nextSlideBtn.disabled = false;
-    }
-
-    slides[index].scrollIntoView({ behavior: "smooth", block: "nearest", inline: "start" });
-    currentSlide = index;
-
-    if (scrollTimeout) {
-      clearTimeout(scrollTimeout);
-    }
-
-    scrollTimeout = setTimeout(
-      () => {
-        ignoreScrollEvents = false;
-      },
-      Math.abs(previousSlide - index) * 500
-    );
-  }
-
-  previousSlideBtn.addEventListener("click", () => {
-    if (currentSlide > 0) {
-      goToSlide(currentSlide - 1);
-    }
-  });
-
-  nextSlideBtn.addEventListener("click", () => {
-    if (currentSlide < slides.length - 1) {
-      goToSlide(currentSlide + 1);
-    }
-  });
-
-  slideIndicators.forEach((indicator, index) => {
-    indicator.addEventListener("click", () => {
-      goToSlide(index);
-    });
-  });
-
-  slideContainer.addEventListener(
-    "scroll",
-    debounce(() => {
-      if (ignoreScrollEvents) return;
-
-      const { width } = slides[0].getBoundingClientRect();
-      const slideIndex = Math.round(slideContainer.scrollLeft / width);
-      goToSlide(slideIndex);
-    }, 500)
-  );
-
-  document.addEventListener("DOMContentLoaded", () => {
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          goToSlide(currentSlide);
-          observer.disconnect(); // Stop observing once the slides section is in view
-        }
-      });
-    });
-
-    observer.observe(slideContainer);
-  });
-
-  function debounce(func: Function, wait: number) {
-    let timeout: NodeJS.Timeout;
-    return function (...args: any[]) {
-      clearTimeout(timeout);
-      timeout = setTimeout(() => func.apply(this, args), wait);
-    };
-  }
-</script>
-
-<style>
-  ul.snap-x::-webkit-scrollbar {
-    display: none;
-    scrollbar-width: none;
-  }
-</style>
