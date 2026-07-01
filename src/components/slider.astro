@@ -15,6 +15,7 @@ const { slides } = Astro.props;
             <img
               src={slide.image?.data?.attributes?.url || "/slider_placeholder.jpeg"}
               alt={slide.image?.data?.attributes?.alternativeText || slide.title}
+              loading="lazy"
               class="h-44 w-full rounded-lg object-cover object-center"
             />
           </div>
