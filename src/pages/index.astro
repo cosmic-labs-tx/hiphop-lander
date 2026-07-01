@@ -13,10 +13,15 @@ import fetchStrapi, { type LandingPage } from "strapi";
 
 const { attributes } = await fetchStrapi<LandingPage>({
   endpoint: "hip-hop-landing-page",
-  query: { populate: "*" },
+  query: {
+    "populate[slide][populate]": "image",
+    "populate[faq]": "*",
+    "populate[feature]": "*",
+    "populate[module_card]": "*",
+    "populate[feature_card]": "*",
+  },
   wrappedByKey: "data",
 });
-console.log(attributes.module_card);
 ---
 
 <Layout title="">
