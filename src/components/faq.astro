@@ -13,9 +13,9 @@ const { faqs } = Astro.props;
         return (
           <li>
             <details>
-              <summary class="flex justify-between list-none items-center gap-x-4 text-pretty text-3xl font-bold sm:text-5xl">
+              <summary class="flex list-none items-center justify-between gap-x-4 text-xl font-bold text-pretty sm:text-3xl">
                 <span>{faq.question}</span>
-                <div id="icon" class="size-10 shrink-0" />
+                <div id="icon" class="size-10 shrink-0 transition-transform" />
               </summary>
               <p class="mt-8 inline-block border-t border-black pt-8 text-lg">{faq.answer}</p>
             </details>
