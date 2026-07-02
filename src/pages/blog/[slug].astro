@@ -21,9 +21,10 @@ export const getStaticPaths = (async () => {
 
 const { post } = Astro.props;
 const content = marked.parse(post.attributes.content ?? "");
+const ogImage = post.attributes.featured_image?.data?.attributes.url;
 ---
 
-<Layout title={post.attributes.title}>
+<Layout title={post.attributes.title} description={post.attributes.description} image={ogImage}>
   <section class="px-6 py-12">
     <div class="mx-auto flex w-full max-w-3xl flex-col gap-6">
       <Link href="/blog/" style="outline" class="self-start">&larr; Back</Link>
