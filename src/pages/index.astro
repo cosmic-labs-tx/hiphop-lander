@@ -36,6 +36,6 @@ const { attributes } = await fetchStrapi<LandingPage>({
     <Faq faqs={attributes.faq} />
     <HopInToday title={attributes.cta_large} />
     {attributes.module_card.length > 0 && <LearnMore modules={attributes.module_card} />}
-    <Insurance title={attributes.insurance_cta} />
+    <Insurance title={attributes.insurance_cta} href={attributes.insurance_cta_href} />
   </div>
 </Layout>

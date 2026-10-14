@@ -55,6 +55,7 @@ export interface LandingPage {
     cta_dark: string;
     cta_large: string;
     insurance_cta: string;
+    insurance_cta_href: string;
     faq: Faq[];
     slide: Slide[];
     feature: Feature[];
