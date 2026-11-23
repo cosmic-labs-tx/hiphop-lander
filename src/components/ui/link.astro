@@ -1,4 +1,6 @@
 ---
+import { cn } from "utils";
+
 interface Props {
   href: string;
   size?: "md" | "lg";
@@ -20,10 +22,10 @@ const styles = {
 <a
   href={href}
   {...rest}
-  class:list={[
+  class:list={cn([
     "text-center ring-blue-700 ring-offset-2 transition duration-75 ease-out focus-visible:ring-2",
     styles[style],
     className,
-  ]}
+  ])}
   ><slot />
 </a>
