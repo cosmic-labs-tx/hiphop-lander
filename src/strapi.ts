@@ -52,6 +52,7 @@ export interface LandingPage {
     hero_highlighted: string;
     hero_title: string;
     hero_subtitle: string;
+    hero_cta_text: string;
     cta_dark: string;
     cta_large: string;
     insurance_cta: string;
@@ -107,6 +108,7 @@ export interface ModuleCard {
   subtitle: string;
   description: string;
   button_text: string;
+  button_href: string;
 }
 
 export interface TermsAndConditions {

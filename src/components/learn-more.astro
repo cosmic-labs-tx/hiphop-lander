@@ -1,6 +1,6 @@
 ---
 import Container from "@components/container.astro";
-import Button from "@components/ui/button.astro";
+import Link from "@components/ui/link.astro";
 import type { ModuleCard } from "strapi";
 type Props = { modules: Array<ModuleCard> };
 const { modules } = Astro.props;
@@ -16,9 +16,9 @@ const { modules } = Astro.props;
             <h3 class="text-pretty text-2xl font-bold sm:text-5xl">{m.title}</h3>
             <p class="text-sm font-light">{m.subtitle}</p>
             <p class="font-medium sm:text-lg">{m.description}</p>
-            <Button style="outline" class="w-full bg-brand-yellow text-black sm:w-auto">
+            <Link href={m.button_href} style="outline" class="block w-full bg-brand-yellow text-black sm:inline-block sm:w-auto">
               {m.button_text}
-            </Button>
+            </Link>
           </div>
         </li>
       ))

@@ -26,15 +26,20 @@ const { attributes } = await fetchStrapi<LandingPage>({
 
 <Layout title="">
   <div class="space-y-12 pt-4 pb-8 md:pt-28 md:pb-24">
-    <Hero highlighted={attributes.hero_highlighted} title={attributes.hero_title} subtitle={attributes.hero_subtitle} />
+    <Hero
+      highlighted={attributes.hero_highlighted}
+      title={attributes.hero_title}
+      subtitle={attributes.hero_subtitle}
+      ctaText={attributes.hero_cta_text}
+    />
     <Features features={attributes.feature} />
     <MoreFeatures featureCards={attributes.feature_card} />
   </div>
   <div class="space-y-16">
     <Slider slides={attributes.slide} />
-    <CtaDark title={attributes.cta_dark} />
+    <CtaDark title={attributes.cta_dark} ctaText={attributes.hero_cta_text} />
     <Faq faqs={attributes.faq} />
-    <HopInToday title={attributes.cta_large} />
+    <HopInToday title={attributes.cta_large} ctaText={attributes.hero_cta_text} />
     {attributes.module_card.length > 0 && <LearnMore modules={attributes.module_card} />}
     <Insurance title={attributes.insurance_cta} href={attributes.insurance_cta_href} />
   </div>

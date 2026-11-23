@@ -3,13 +3,13 @@ import Container from "@components/container.astro";
 import Link from "@components/ui/link.astro";
 import { Config } from "config";
 
-type Props = { title: string };
-const { title } = Astro.props;
+type Props = { title: string; ctaText: string };
+const { title, ctaText } = Astro.props;
 ---
 
 <Container>
   <div class="flex flex-col items-center gap-8">
     <h2 class="text-center text-4xl font-bold sm:text-6xl">{title}</h2>
-    <Link href={Config.ctaUrl}>Start Course</Link>
+    <Link href={Config.ctaUrl}>{ctaText}</Link>
   </div>
 </Container>
